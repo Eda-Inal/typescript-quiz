@@ -38,10 +38,10 @@ h1{
     @include h(2.5rem,500)
 }
 h2{
-    @include h(2.2rem,500)
+    @include h(2rem,400)
 }
 h3{
-    @include h(2rem,500)
+    @include h(1.8rem,500)
 }
 h4{
     @include h(1.5rem,100)
@@ -52,4 +52,28 @@ h4{
     display:flex;
     justify-content:space-between;
     align-items:center;
+}
+.timer{
+    display: flex;
+    justify-content:center;
+    margin-top: 2rem;
+}
+.circle{
+    width: 150px;
+    height: 150px;
+    border: 1px solid white;
+    border-radius:50%;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow: 2px 2px rgb(200, 200, 200);
+    
+    
+}
+.question-part{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
 }
