@@ -1,26 +1,47 @@
 import './styles.scss';
 import { FaArrowRight,FaArrowLeft } from "react-icons/fa";
 import datas from "../public/datas.json"
+import { useState } from 'react';
 
 
 
 function App() {
+  const [page,setPage] = useState<number>(1)
+  interface Answer {
+    id: string;
+    text: string;
+    isCorrect: boolean;
+  }
+  
   interface Question {
     question: string;
-    answers: {
-      a: string;
-      b: string;
-      c: string;
-      d: string;
-    };
-    correctAnswer: string;
+    answers: Answer[]; // Cevaplar artık bir dizi nesne
     id: number;
   }
   
-  let page : number=1
-  const currentQuestion = datas.find((question: Question) => question.id === page);
+  
 
-page
+  const currentQuestion = datas.find((question: Question) => question.id === page);
+  const datasLength = datas.length;
+
+function nextQ() {
+  if(page === datasLength){
+    setPage(1)
+  }else{
+    setPage(page+1)
+  }
+
+}
+function lastQ() {
+  if(page === 1){
+    setPage(datasLength)
+  }else{
+    setPage(page-1)
+  }
+
+}
+
+ 
 
   return (
     <>
@@ -39,34 +60,34 @@ page
         <div className='question-part'>
           <h2>{currentQuestion?.question}</h2>
           <div className='middle-area'>
-<button className='btn-arrow'><FaArrowLeft/></button>
+<button className='btn-arrow' onClick={()=> lastQ()} ><FaArrowLeft/></button>
 <div className='buttons'>
             <div className='button-row'>
               <button className='primary-btn btn-content'>
-                <div>A)</div>
-                <div>Paris</div>
+              
+                <div>{currentQuestion?.answers[0].text}</div>
               </button>
-              <button className='secondary-btn btn-content'>
-                <div>B)</div>
-                <div>Berlin</div>
+              <button className='primary-btn btn-content'>
+             
+                <div>{currentQuestion?.answers[1].text}</div>
               </button>
 
             </div>
             <div className='button-row'>
               <button className='primary-btn btn-content'>
-                <div>C)</div>
-                <div>Belgium</div>
+           
+                <div>{currentQuestion?.answers[2].text}</div>
               </button>
 
 
               <button className='primary-btn btn-content'>
-                <div>D)</div>
-                <div>Washington</div>
+           
+                <div>{currentQuestion?.answers[3].text}</div>
               </button>
 
             </div>
           </div>
-<button className='btn-arrow'><FaArrowRight/></button>
+<button className='btn-arrow' onClick={()=> nextQ()}><FaArrowRight/></button>
           </div>
       
         </div>

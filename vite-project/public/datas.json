@@ -1,27 +1,52 @@
 [
     {
-    "question" : "What is the capital city of German?",
-    "answers":{
-        "a":"Paris",
-        "b":"Berlin",
-        "c":"Belgium",
-        "d":"Washington"
+        "question": "What is React?",
+        "answers": [
+            { "id": "a", "text": "A programming language", "isCorrect": false },
+            { "id": "b", "text": "A JavaScript framework", "isCorrect": false },
+            { "id": "c", "text": "A JavaScript library", "isCorrect": true },
+            { "id": "d", "text": "A web browser", "isCorrect": false }
+        ],
+        "id": 1
     },
-    "correctAnswer":"Berlin",
-    "id":1
-   
-},
-{
-    "question" : "What is the capital city of France?",
-    "answers":{
-        "a":"Paris",
-        "b":"Berlin",
-        "c":"Belgium",
-        "d":"Washington"
+    {
+        "question": "What are components in React?",
+        "answers": [
+            { "id": "a", "text": "HTML elements", "isCorrect": false },
+            { "id": "b", "text": "Reusable pieces of UI", "isCorrect": true },
+            { "id": "c", "text": "CSS styles", "isCorrect": false },
+            { "id": "d", "text": "JavaScript variables", "isCorrect": false }
+        ],
+        "id": 2
     },
-    "correctAnswer":"Paris",
-    "id":2
-   
-}
-
+    {
+        "question": "What is the purpose of state in a React component?",
+        "answers": [
+            { "id": "a", "text": "To hold static data", "isCorrect": false },
+            { "id": "b", "text": "To store local component data that can change", "isCorrect": true },
+            { "id": "c", "text": "To manage global data", "isCorrect": false },
+            { "id": "d", "text": "To define CSS styles", "isCorrect": false }
+        ],
+        "id": 3
+    },
+    {
+        "question": "What is JSX?",
+        "answers": [
+            { "id": "a", "text": "A JavaScript syntax extension for HTML-like code", "isCorrect": true },
+            { "id": "b", "text": "A new programming language", "isCorrect": false },
+            { "id": "c", "text": "A CSS preprocessor", "isCorrect": false },
+            { "id": "d", "text": "A type of database", "isCorrect": false }
+        ],
+        "id": 4
+    },
+    {
+        "question": "How do you pass data from a parent component to a child component in React?",
+        "answers": [
+            { "id": "a", "text": "Through props", "isCorrect": true },
+            { "id": "b", "text": "Using local storage", "isCorrect": false },
+            { "id": "c", "text": "By creating a global variable", "isCorrect": false },
+            { "id": "d", "text": "Through event listeners", "isCorrect": false }
+        ],
+        "id": 5
+    }
 ]
