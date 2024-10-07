@@ -1,0 +1,27 @@
+[
+    {
+    "question" : "What is the capital city of German?",
+    "answers":{
+        "a":"Paris",
+        "b":"Berlin",
+        "c":"Belgium",
+        "d":"Washington"
+    },
+    "correctAnswer":"Berlin",
+    "id":1
+   
+},
+{
+    "question" : "What is the capital city of France?",
+    "answers":{
+        "a":"Paris",
+        "b":"Berlin",
+        "c":"Belgium",
+        "d":"Washington"
+    },
+    "correctAnswer":"Paris",
+    "id":2
+   
+}
+
+]

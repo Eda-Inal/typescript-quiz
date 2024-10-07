@@ -1,8 +1,26 @@
 import './styles.scss';
+import { FaArrowRight,FaArrowLeft } from "react-icons/fa";
+import datas from "../public/datas.json"
+
 
 
 function App() {
+  interface Question {
+    question: string;
+    answers: {
+      a: string;
+      b: string;
+      c: string;
+      d: string;
+    };
+    correctAnswer: string;
+    id: number;
+  }
+  
+  let page : number=1
+  const currentQuestion = datas.find((question: Question) => question.id === page);
 
+page
 
   return (
     <>
@@ -19,8 +37,10 @@ function App() {
           </div>
         </div>
         <div className='question-part'>
-          <h2>What is the capital city of German?</h2>
-          <div className='buttons'>
+          <h2>{currentQuestion?.question}</h2>
+          <div className='middle-area'>
+<button className='btn-arrow'><FaArrowLeft/></button>
+<div className='buttons'>
             <div className='button-row'>
               <button className='primary-btn btn-content'>
                 <div>A)</div>
@@ -46,6 +66,9 @@ function App() {
 
             </div>
           </div>
+<button className='btn-arrow'><FaArrowRight/></button>
+          </div>
+      
         </div>
 
 
