@@ -15,7 +15,7 @@ function App() {
   
   interface Question {
     question: string;
-    answers: Answer[]; // Cevaplar artık bir dizi nesne
+    answers: Answer[]; 
     id: number;
   }
   
@@ -41,8 +41,6 @@ function lastQ() {
 
 }
 
- 
-
   return (
     <>
 
@@ -62,38 +60,26 @@ function lastQ() {
           <div className='middle-area'>
 <button className='btn-arrow' onClick={()=> lastQ()} ><FaArrowLeft/></button>
 <div className='buttons'>
-            <div className='button-row'>
+          
               <button className='primary-btn btn-content'>
               
-                <div>{currentQuestion?.answers[0].text}</div>
+                <h4>{currentQuestion?.answers[0].text}</h4>
               </button>
               <button className='primary-btn btn-content'>
              
-                <div>{currentQuestion?.answers[1].text}</div>
-              </button>
-
-            </div>
-            <div className='button-row'>
+                <h4>{currentQuestion?.answers[1].text}</h4>
+              </button>            
               <button className='primary-btn btn-content'>
            
-                <div>{currentQuestion?.answers[2].text}</div>
+                <h4>{currentQuestion?.answers[2].text}</h4>
               </button>
-
-
               <button className='primary-btn btn-content'>
-           
-                <div>{currentQuestion?.answers[3].text}</div>
+                <h4>{currentQuestion?.answers[3].text}</h4>
               </button>
-
-            </div>
           </div>
 <button className='btn-arrow' onClick={()=> nextQ()}><FaArrowRight/></button>
           </div>
-      
         </div>
-
-
-
       </div>
 
     </>
