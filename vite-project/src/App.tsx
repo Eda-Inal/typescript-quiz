@@ -1,12 +1,14 @@
 import './styles.scss';
 import { FaArrowRight,FaArrowLeft } from "react-icons/fa";
 import datas from "../public/datas.json"
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 
 
 function App() {
   const [page,setPage] = useState<number>(1)
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null); 
+
   interface Answer {
     id: string;
     text: string;
@@ -19,10 +21,21 @@ function App() {
     id: number;
   }
   
-  
+
 
   const currentQuestion = datas.find((question: Question) => question.id === page);
   const datasLength = datas.length;
+  const currentId = currentQuestion?.id
+const trueAnswer = currentQuestion?.answers.filter((answer) => {
+  return  answer.isCorrect 
+})
+
+console.log(trueAnswer);
+console.log(currentId);
+
+useEffect(() => {
+  setSelectedAnswer(null); 
+}, [currentQuestion]);
 
 function nextQ() {
   if(page === datasLength){
@@ -39,6 +52,9 @@ function lastQ() {
     setPage(page-1)
   }
 
+}
+function findTrue(answerId:string, isCorrect:boolean){
+  setSelectedAnswer(answerId);
 }
 
   return (
@@ -60,22 +76,18 @@ function lastQ() {
           <div className='middle-area'>
 <button className='btn-arrow' onClick={()=> lastQ()} ><FaArrowLeft/></button>
 <div className='buttons'>
-          
-              <button className='primary-btn btn-content'>
+  {
+    currentQuestion?.answers.map((btn) =>(
+      <button onClick={() => findTrue(btn.id, btn.isCorrect)} 
+      className={`primary-btn btn-content ${selectedAnswer === btn.id ? (btn.isCorrect ? 'secondary-btn' : 'btn-false') : ''}`}
+      key={btn.id}>
               
-                <h4>{currentQuestion?.answers[0].text}</h4>
+                <h4>{btn.text}</h4>
               </button>
-              <button className='primary-btn btn-content'>
+    ))
+  }
+          
              
-                <h4>{currentQuestion?.answers[1].text}</h4>
-              </button>            
-              <button className='primary-btn btn-content'>
-           
-                <h4>{currentQuestion?.answers[2].text}</h4>
-              </button>
-              <button className='primary-btn btn-content'>
-                <h4>{currentQuestion?.answers[3].text}</h4>
-              </button>
           </div>
 <button className='btn-arrow' onClick={()=> nextQ()}><FaArrowRight/></button>
           </div>

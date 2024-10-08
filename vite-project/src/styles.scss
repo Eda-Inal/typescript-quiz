@@ -51,9 +51,11 @@ body {
 }
 
 .secondary-btn {
-    @include btn-style(#3DD923, #fff)
+    @include btn-style(#29a114, #fff)
 }
-
+.btn-false{
+    @include btn-style(#f52e28, #fff)
+}
 h1 {
     @include h(2.5rem, 500);
 
