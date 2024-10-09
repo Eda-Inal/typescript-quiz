@@ -50,6 +50,7 @@ console.log("answer",answerControl);
 
   useEffect(() => {
     setSelectedAnswer(null);
+    setButtonState({ class: "", btnId: "" });
     if (currentQuestion?.clicked) {
       const selectedAnswer = answerControl.find(
         (answer) => answer.answerId === currentId
