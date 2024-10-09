@@ -9,6 +9,15 @@ function App() {
   const [page, setPage] = useState<number>(1)
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score,setScore] = useState<number>(0)
+  const [answerControl, setAnswerControl] = useState<
+  { answerId: number; isTrue: boolean | null;btnId:string }[]
+>([]);
+const [buttonState, setButtonState] = useState<{
+  class: string;
+  btnId: string;
+}>({ class: "", btnId: "" });
+  
+console.log("answer",answerControl);
 
   interface Answer {
     id: string;
@@ -21,8 +30,10 @@ function App() {
     answers: Answer[];
     id: number;
     clicked:boolean;
+
   }
 
+ 
 
 
   const currentQuestion = datas.find((question: Question) => question.id === page);
@@ -32,12 +43,31 @@ function App() {
     return answer.isCorrect
   })
 
+
   console.log(trueAnswer);
   console.log(currentId);
+  console.log(currentQuestion?.clicked)
 
   useEffect(() => {
     setSelectedAnswer(null);
-  }, [currentQuestion]);
+    if (currentQuestion?.clicked) {
+      const selectedAnswer = answerControl.find(
+        (answer) => answer.answerId === currentId
+      );
+      
+      console.log("clicked",selectedAnswer); 
+      if (selectedAnswer) {
+        // Eğer seçilen bir cevap varsa, buttonState'i güncelle
+        setButtonState({
+          class: selectedAnswer.isTrue ? "secondary-btn" : "btn-false",
+          btnId: selectedAnswer.btnId,
+        });
+      }
+   
+    }
+
+  }, [currentQuestion,answerControl]);
+  
 
   function nextQ() {
     if (page === datasLength) {
@@ -56,8 +86,28 @@ function App() {
 
   }
   function findTrue(answerId: string,isCorrect:boolean) {
-    setSelectedAnswer(answerId);
-    if(isCorrect) setScore(score +10)
+    !currentQuestion?.clicked &&  setSelectedAnswer(answerId); // soru seçildiyse tekrar seçilemiyor
+    if (!currentQuestion?.clicked) {
+      setAnswerControl((prevState) => [
+        ...prevState, 
+        {
+          answerId: currentId ?? 0, 
+          isTrue: isCorrect, 
+          btnId : answerId
+        }
+      ]);
+    }
+    
+    
+  
+   ( !currentQuestion?.clicked && isCorrect )&& setScore(score +10) // soru daha önce seçildiyse puanı değiştirmiyor
+   
+   if (currentQuestion) {
+    currentQuestion.clicked = true;
+  
+  }
+
+      
   }
 
   return (
@@ -82,7 +132,7 @@ function App() {
               {
                 currentQuestion?.answers.map((btn) => (
                   <button onClick={() => findTrue(btn.id,btn.isCorrect)}
-                    className={`primary-btn btn-content ${selectedAnswer === btn.id ? (btn.isCorrect ? 'secondary-btn' : 'btn-false') : ''}`}
+                  className={`primary-btn btn-content ${currentQuestion?.clicked ? (buttonState.btnId === btn.id ? buttonState.class : '') : (selectedAnswer === btn.id ? (btn.isCorrect ? 'secondary-btn' : 'btn-false') : '')}`} 
                     key={btn.id}>
 
                     <h4>{btn.text}</h4>

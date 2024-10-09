@@ -9,6 +9,7 @@
         ],
         "id": 1,
         "clicked":false
+        
     },
     {
         "question": "What are components in React?",
