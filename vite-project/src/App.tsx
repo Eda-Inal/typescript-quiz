@@ -16,6 +16,7 @@ const [buttonState, setButtonState] = useState<{
   class: string;
   btnId: string;
 }>({ class: "", btnId: "" });
+const [finishQuiz,setFinishQuiz] = useState<boolean>(false)
   
 console.log("answer",answerControl);
 
@@ -110,6 +111,7 @@ console.log("answer",answerControl);
 
       
   }
+  
 
   return (
     <>
@@ -120,7 +122,24 @@ console.log("answer",answerControl);
           <h1>REACT QUIZ</h1>
           <h4>Score:{score}</h4>
         </div>
-        <div className='timer'>
+        {
+          finishQuiz &&(
+<div className='score'>
+        <div className='score-card'>
+          <h3>Your score is 5 out of 10</h3>
+
+          <h4>Keep practicing</h4>
+
+        </div>
+        <button className='try-again-btn' onClick={() => setFinishQuiz(false)}>Try again</button>
+        </div>
+          )
+        }
+        
+      {
+        !finishQuiz && (
+<>
+<div className='timer'>
           <div className='circle'>
             <h3>20</h3>
           </div>
@@ -140,12 +159,22 @@ console.log("answer",answerControl);
                   </button>
                 ))
               }
-
+{currentQuestion?.id === datasLength &&(
+  <div className='finish-btn'>
+          <button onClick={() => {setFinishQuiz(true)}} className='try-again-btn'>Finish the test</button>
+          </div>
+)}
 
             </div>
             <button className={`btn-arrow ${currentId===datasLength ? 'display' :""}`  }   onClick={() => nextQ()}><FaArrowRight /></button>
           </div>
+        
         </div>
+</>
+        )
+      }
+       
+        
       </div>
 
     </>
