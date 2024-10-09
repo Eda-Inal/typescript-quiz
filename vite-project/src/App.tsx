@@ -117,7 +117,7 @@ console.log("answer",answerControl);
       <div className="container">
         <div className="top-area">
           <h4>Q:{currentId}/5</h4>
-          <h1>Quiz Game</h1>
+          <h1>REACT QUIZ</h1>
           <h4>Score:{score}</h4>
         </div>
         <div className='timer'>
@@ -126,7 +126,7 @@ console.log("answer",answerControl);
           </div>
         </div>
         <div className='question-part'>
-          <h2>{currentQuestion?.question}</h2>
+          <h3>{currentQuestion?.question}</h3>
           <div className='middle-area'>
             <button className={`btn-arrow ${currentId===1 ? 'display' :""}`  }  onClick={() => lastQ()} ><FaArrowLeft /></button>
             <div className='buttons'>

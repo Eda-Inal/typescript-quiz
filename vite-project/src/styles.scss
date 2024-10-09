@@ -1,5 +1,5 @@
-$primary-color : #171744;
-$font-color : #fff;
+$primary-color : #1b1e25 ;
+$font-color : #f9f9f9;
 
 body {
     background-color: $primary-color;
@@ -12,13 +12,13 @@ body {
     color: $font-color;
     font-size: 1.3rem;
     padding: 10px 20px;
-    border-radius: 10px;
+    border-radius: 40px;
     border: none;
     width: 45%;
     height: 80px;
     cursor: pointer;
     margin-top: 1rem;
-    box-shadow: 2px 2px rgb(164, 164, 164);
+    box-shadow: 2px 2px #535b6b;
 
     @media (max-width: 600px) {
         width: 95%;
@@ -47,17 +47,18 @@ body {
 }
 
 .primary-btn {
-    @include btn-style(#e7e7e7, #242424)
+    @include btn-style(#404756, #fafafa)
 }
 
 .secondary-btn {
-    @include btn-style(#29a114, #fff)
+    @include btn-style(#58dc82, #181818)
 }
 .btn-false{
-    @include btn-style(#f52e28, #fff)
+    @include btn-style(#df443f, #fff)
 }
 h1 {
-    @include h(2.5rem, 500);
+    @include h(2.2rem, 400);
+    color: #58c4dc;
 
     @media (max-width: 1024px) {
         @include h(2.3rem, 500); 
@@ -81,25 +82,26 @@ h2 {
 }
 
 h3 {
-    @include h(1.8rem, 500);
+    @include h(1.7rem, 300);
 
     @media (max-width: 1024px) {
-        @include h(1.6rem, 500);
+        @include h(1.6rem, 300);
     }
 
     @media (max-width: 600px) {
-        @include h(1.4rem, 500);
+        @include h(1.4rem, 300);
     }
 }
 
 h4 {
-    @include h(1.3rem, 100);
+    @include h(1.2rem, 100);
+    
     @media (max-width: 1024px) {
-        @include h(1.1rem, 500);
+        @include h(1.1rem, 400);
     }
 
     @media (max-width: 600px) {
-        @include h(1rem, 500);
+        @include h(0.9rem, 400);
     }
 }
 
@@ -117,8 +119,8 @@ h4 {
 }
 
 .circle {
-    width: 130px;
-    height: 130px;
+    width: 120px;
+    height: 120px;
     border: 1px solid white;
     border-radius: 50%;
     display: flex;
@@ -141,6 +143,7 @@ h4 {
     margin-top: 3rem;
     width: 80%;
     margin: 3rem auto;
+    
 
 }
 
@@ -186,10 +189,9 @@ h4 {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    border: 1px solid white;
-    color: white;
-    background-color: #282773;
-    box-shadow: 1px 1px;
+    color: rgb(16, 16, 16);
+    background-color: #58c4dc;
+
     cursor: pointer;
     @media (max-width: 600px) {
         width: 30px;
