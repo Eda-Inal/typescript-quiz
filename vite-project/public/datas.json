@@ -7,7 +7,8 @@
             { "id": "c", "text": "A JavaScript library", "isCorrect": true },
             { "id": "d", "text": "A web browser", "isCorrect": false }
         ],
-        "id": 1
+        "id": 1,
+        "clicked":false
     },
     {
         "question": "What are components in React?",
@@ -17,7 +18,8 @@
             { "id": "c", "text": "CSS styles", "isCorrect": false },
             { "id": "d", "text": "JavaScript variables", "isCorrect": false }
         ],
-        "id": 2
+        "id": 2,
+        "clicked":false
     },
     {
         "question": "What is the purpose of state in a React component?",
@@ -27,7 +29,8 @@
             { "id": "c", "text": "To manage global data", "isCorrect": false },
             { "id": "d", "text": "To define CSS styles", "isCorrect": false }
         ],
-        "id": 3
+        "id": 3,
+        "clicked":false
     },
     {
         "question": "What is JSX?",
@@ -37,7 +40,8 @@
             { "id": "c", "text": "A CSS preprocessor", "isCorrect": false },
             { "id": "d", "text": "A type of database", "isCorrect": false }
         ],
-        "id": 4
+        "id": 4,
+        "clicked":false
     },
     {
         "question": "How do you pass data from a parent component to a child component in React?",
@@ -47,6 +51,7 @@
             { "id": "c", "text": "By creating a global variable", "isCorrect": false },
             { "id": "d", "text": "Through event listeners", "isCorrect": false }
         ],
-        "id": 5
+        "id": 5,
+        "clicked":false
     }
 ]

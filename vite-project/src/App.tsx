@@ -20,6 +20,7 @@ function App() {
     question: string;
     answers: Answer[];
     id: number;
+    clicked:boolean;
   }
 
 
@@ -76,7 +77,7 @@ function App() {
         <div className='question-part'>
           <h2>{currentQuestion?.question}</h2>
           <div className='middle-area'>
-            <button className='btn-arrow' onClick={() => lastQ()} ><FaArrowLeft /></button>
+            <button className={`btn-arrow ${currentId===1 ? 'display' :""}`  }  onClick={() => lastQ()} ><FaArrowLeft /></button>
             <div className='buttons'>
               {
                 currentQuestion?.answers.map((btn) => (
@@ -91,7 +92,7 @@ function App() {
 
 
             </div>
-            <button className='btn-arrow' onClick={() => nextQ()}><FaArrowRight /></button>
+            <button className={`btn-arrow ${currentId===datasLength ? 'display' :""}`  }   onClick={() => nextQ()}><FaArrowRight /></button>
           </div>
         </div>
       </div>
