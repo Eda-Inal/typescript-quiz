@@ -116,7 +116,7 @@ console.log("answer",answerControl);
 
       <div className="container">
         <div className="top-area">
-          <h4>Q:{currentId}/5</h4>
+          <h4>Q:{currentId}/{datasLength}</h4>
           <h1>REACT QUIZ</h1>
           <h4>Score:{score}</h4>
         </div>

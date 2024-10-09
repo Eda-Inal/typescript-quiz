@@ -54,5 +54,60 @@
         ],
         "id": 5,
         "clicked":false
-    }
+    },{
+        "question": "What is the virtual DOM in React?",
+        "answers": [
+          { "id": "a", "text": "A copy of the real DOM for debugging purposes", "isCorrect": false },
+          { "id": "b", "text": "A lightweight representation of the real DOM", "isCorrect": true },
+          { "id": "c", "text": "A feature of the browser", "isCorrect": false },
+          { "id": "d", "text": "A new programming language", "isCorrect": false }
+        ],
+        "id": 6,
+        "clicked": false
+      },
+      {
+        "question": "What is a key in React and why is it important?",
+        "answers": [
+          { "id": "a", "text": "It identifies elements uniquely in a list for efficient updates", "isCorrect": true },
+          { "id": "b", "text": "It is used for event handling", "isCorrect": false },
+          { "id": "c", "text": "It is used for passing data between components", "isCorrect": false },
+          { "id": "d", "text": "It defines the component's state", "isCorrect": false }
+        ],
+        "id": 7,
+        "clicked": false
+      },
+      {
+        "question": "What lifecycle method is used for making API calls in class components?",
+        "answers": [
+          { "id": "a", "text": "componentDidMount", "isCorrect": true },
+          { "id": "b", "text": "componentWillUnmount", "isCorrect": false },
+          { "id": "c", "text": "render", "isCorrect": false },
+          { "id": "d", "text": "constructor", "isCorrect": false }
+        ],
+        "id": 8,
+        "clicked": false
+      },
+      {
+        "question": "What hook is used to manage side effects in functional components?",
+        "answers": [
+          { "id": "a", "text": "useEffect", "isCorrect": true },
+          { "id": "b", "text": "useState", "isCorrect": false },
+          { "id": "c", "text": "useContext", "isCorrect": false },
+          { "id": "d", "text": "useReducer", "isCorrect": false }
+        ],
+        "id": 9,
+        "clicked": false
+      },
+      {
+        "question": "How do you optimize performance in React applications?",
+        "answers": [
+          { "id": "a", "text": "Using the virtual DOM and memoization", "isCorrect": true },
+          { "id": "b", "text": "Only using functional components", "isCorrect": false },
+          { "id": "c", "text": "Always using class components", "isCorrect": false },
+          { "id": "d", "text": "Avoiding the use of hooks", "isCorrect": false }
+        ],
+        "id": 10,
+        "clicked": false
+      }
+      
 ]
