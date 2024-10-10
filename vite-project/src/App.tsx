@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 
 function App() {
+  const [startQuiz,setStartQuiz] = useState<boolean>(false)
   const [page, setPage] = useState<number>(1)
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score,setScore] = useState<number>(0)
@@ -18,8 +19,6 @@ const [buttonState, setButtonState] = useState<{
 }>({ class: "", btnId: "" });
 const [finishQuiz,setFinishQuiz] = useState<boolean>(false)
   
-
-
   interface Answer {
     id: string;
     text: string;
@@ -33,18 +32,10 @@ const [finishQuiz,setFinishQuiz] = useState<boolean>(false)
     clicked:boolean;
 
   }
-
- 
-
-
   let currentQuestion = datas.find((question: Question) => question.id === page);
   const datasLength = datas.length;
   const currentId = currentQuestion?.id
  
-
-
-
-
   useEffect(() => {
     setSelectedAnswer(null);
     setButtonState({ class: "", btnId: "" });
@@ -117,6 +108,9 @@ setSelectedAnswer("")
 setAnswerControl([]); 
 
   }
+  function startQ(){
+    setStartQuiz(true)
+  }
   
 
   return (
@@ -128,6 +122,15 @@ setAnswerControl([]);
           <h1>REACT QUIZ</h1>
           <h4>Score:{score}</h4>
         </div>
+        {
+          !startQuiz && (
+            <div className='start-btn'>
+            <button onClick={startQ} className='try-finish-btn'>Start Quiz</button>
+            </div>
+          )
+        }
+    
+       
         {
           finishQuiz &&(
 <div className='score'>
@@ -158,7 +161,7 @@ setAnswerControl([]);
         }
         
       {
-        !finishQuiz && (
+        (!finishQuiz && startQuiz) && (
 <>
 <div className='timer'>
           <div className='circle'>
