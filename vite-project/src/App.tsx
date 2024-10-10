@@ -18,7 +18,7 @@ const [buttonState, setButtonState] = useState<{
 }>({ class: "", btnId: "" });
 const [finishQuiz,setFinishQuiz] = useState<boolean>(false)
   
-console.log("answer",answerControl);
+
 
   interface Answer {
     id: string;
@@ -40,14 +40,10 @@ console.log("answer",answerControl);
   let currentQuestion = datas.find((question: Question) => question.id === page);
   const datasLength = datas.length;
   const currentId = currentQuestion?.id
-  const trueAnswer = currentQuestion?.answers.filter((answer) => {
-    return answer.isCorrect
-  })
+ 
 
 
-  console.log(trueAnswer);
-  console.log(currentId);
-  console.log(currentQuestion?.clicked)
+
 
   useEffect(() => {
     setSelectedAnswer(null);
@@ -57,7 +53,7 @@ console.log("answer",answerControl);
         (answer) => answer.answerId === currentId
       );
       
-      console.log("clicked",selectedAnswer); 
+      
       if (selectedAnswer) {
         // Eğer seçilen bir cevap varsa, buttonState'i güncelle
         setButtonState({
