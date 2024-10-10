@@ -37,7 +37,7 @@ console.log("answer",answerControl);
  
 
 
-  const currentQuestion = datas.find((question: Question) => question.id === page);
+  let currentQuestion = datas.find((question: Question) => question.id === page);
   const datasLength = datas.length;
   const currentId = currentQuestion?.id
   const trueAnswer = currentQuestion?.answers.filter((answer) => {
@@ -111,6 +111,16 @@ console.log("answer",answerControl);
 
       
   }
+  function tryAgain()  {
+setScore(0);
+setButtonState({class:"",btnId:""})
+setPage(1)
+setFinishQuiz(false);
+datas.map((question: Question) => question.clicked = false);
+setSelectedAnswer("")
+setAnswerControl([]); 
+
+  }
   
 
   return (
@@ -146,7 +156,7 @@ console.log("answer",answerControl);
           
 
         </div>
-        <button className='try-again-btn' onClick={() => setFinishQuiz(false)}>Try again</button>
+        <button className='try-finish-btn' onClick={() => tryAgain()}>Try again</button>
         </div>
           )
         }
@@ -176,7 +186,7 @@ console.log("answer",answerControl);
               }
 {currentQuestion?.id === datasLength &&(
   <div className='finish-btn'>
-          <button onClick={() => {setFinishQuiz(true)}} className='try-again-btn'>Finish the test</button>
+          <button onClick={() => {setFinishQuiz(true)}} className='try-finish-btn'>Finish the test</button>
           </div>
 )}
 
