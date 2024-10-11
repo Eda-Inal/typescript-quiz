@@ -125,7 +125,7 @@ setAnswerControl([]);
         {
           !startQuiz && (
             <div className='start-btn'>
-            <button onClick={startQ} className='try-finish-btn'>Start Quiz</button>
+            <button onClick={startQ} className='start-btn-style'>Start Quiz</button>
             </div>
           )
         }
