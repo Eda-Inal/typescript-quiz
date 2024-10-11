@@ -1,4 +1,3 @@
-import React from 'react'
 import { useQuizContext } from '../Context'
 
 function Score() {

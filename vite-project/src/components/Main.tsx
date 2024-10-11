@@ -3,6 +3,8 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import datas from "../../public/datas.json"
 import { useState, useEffect } from 'react';
 import Score from './Score';
+import Header from './Header';
+import Timer from './Timer';
 import { useQuizContext } from '../Context'
 
 
@@ -23,21 +25,22 @@ const [buttonState, setButtonState] = useState<{
   btnId: string;
 }>({ class: "", btnId: "" });
 const [finishQuiz,setFinishQuiz] = useState<boolean>(false)
+interface Answer {
+  id: string;
+  text: string;
+  isCorrect: boolean;
+}
+
+interface Question {
+  question: string;
+  answers: Answer[];
+  id: number;
+  clicked:boolean;
+
+
+}
   
-  interface Answer {
-    id: string;
-    text: string;
-    isCorrect: boolean;
-  }
-
-  interface Question {
-    question: string;
-    answers: Answer[];
-    id: number;
-    clicked:boolean;
-
-  }
-  let currentQuestion = datas.find((question: Question) => question.id === page);
+let currentQuestion = datas.find((question: Question) => question.id === page);
   const datasLength = datas.length;
   const currentId = currentQuestion?.id
   let correctAnswer = currentQuestion?.answers.find(answer => answer.isCorrect);
@@ -127,7 +130,7 @@ setAnswerControl([]);
       <div className="container">
         <div className="top-area">
           <h4 className={`${!startQuiz? "display" : ""}`}>Q:{currentId}/{datasLength}</h4>
-          <h1>REACT QUIZ</h1>
+         <Header/>
         <Score/>
         </div>
         {
@@ -171,11 +174,7 @@ setAnswerControl([]);
       {
         (!finishQuiz && startQuiz) && (
 <>
-<div className='timer'>
-          <div className='circle'>
-            <h3>20</h3>
-          </div>
-        </div>
+<Timer/>
         <div className='question-part'>
           <h3>{currentQuestion?.question}</h3>
           <div className='middle-area'>
