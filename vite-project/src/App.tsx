@@ -37,6 +37,9 @@ const [finishQuiz,setFinishQuiz] = useState<boolean>(false)
   let currentQuestion = datas.find((question: Question) => question.id === page);
   const datasLength = datas.length;
   const currentId = currentQuestion?.id
+  let correctAnswer = currentQuestion?.answers.find(answer => answer.isCorrect);
+
+console.log("correct answer",correctAnswer?.id);
  
   useEffect(() => {
     setSelectedAnswer(null);
@@ -176,14 +179,27 @@ setAnswerControl([]);
             <button className={`btn-arrow ${currentId===1 ? 'display' :""}`  }  onClick={() => lastQ()} ><FaArrowLeft /></button>
             <div className='buttons'>
               {
-                currentQuestion?.answers.map((btn) => (
+                currentQuestion?.answers.map((btn) => {
+                  const correctAnswerId = correctAnswer?.id; 
+                  return (
                   <button onClick={() => findTrue(btn.id,btn.isCorrect)}
-                  className={`primary-btn btn-content ${currentQuestion?.clicked ? (buttonState.btnId === btn.id ? buttonState.class : '') : (selectedAnswer === btn.id ? (btn.isCorrect ? 'secondary-btn' : 'btn-false') : '')}`} 
+                  className={`primary-btn btn-content ${
+                    currentQuestion?.clicked ? 
+                      // eğer soru tıklanmışsa:
+                      (buttonState.btnId === btn.id ? 
+                        // tıklanan cevap:
+                        buttonState.class : 
+                        // yanlış cevap tıklanmışsa, doğru cevaba yeşil sınıf ekle:
+                        (correctAnswerId === btn.id ? 'secondary-btn' : '')
+                      ) : 
+                      // tıklanmamışsa normal kontrol:
+                      (selectedAnswer === btn.id ? (btn.isCorrect ? 'secondary-btn' : 'btn-false') : '')
+                  }`}
                     key={btn.id}>
 
                     <h4>{btn.text}</h4>
                   </button>
-                ))
+                ) })
               }
 {currentQuestion?.id === datasLength &&(
   <div className='finish-btn'>
