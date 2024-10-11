@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 
 
 
+
+
 function App() {
   const [startQuiz,setStartQuiz] = useState<boolean>(false)
   const [page, setPage] = useState<number>(1)
@@ -118,9 +120,9 @@ setAnswerControl([]);
 
       <div className="container">
         <div className="top-area">
-          <h4>Q:{currentId}/{datasLength}</h4>
+          <h4 className={`${!startQuiz? "display" : ""}`}>Q:{currentId}/{datasLength}</h4>
           <h1>REACT QUIZ</h1>
-          <h4>Score:{score}</h4>
+          <h4 className={`${!startQuiz? "display" : ""}`}>Score:{score}</h4>
         </div>
         {
           !startQuiz && (
