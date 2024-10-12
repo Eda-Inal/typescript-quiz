@@ -6,15 +6,14 @@ import Score from './Score';
 import Header from './Header';
 import Timer from './Timer';
 import { useQuizContext } from '../Context'
+import { Question,QuizState } from './Interfaces';
 
 
 
 
 
 function Main() {
-  const { score ,setScore} = useQuizContext();
-  const [startQuiz,setStartQuiz] = useState<boolean>(false)
-  const [page, setPage] = useState<number>(1)
+  const { score ,setScore,quiz,setQuiz} = useQuizContext();
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
   const [answerControl, setAnswerControl] = useState<
@@ -24,29 +23,17 @@ const [buttonState, setButtonState] = useState<{
   class: string;
   btnId: string;
 }>({ class: "", btnId: "" });
-const [finishQuiz,setFinishQuiz] = useState<boolean>(false)
-interface Answer {
-  id: string;
-  text: string;
-  isCorrect: boolean;
-}
-
-interface Question {
-  question: string;
-  answers: Answer[];
-  id: number;
-  clicked:boolean;
 
 
-}
+
   
-let currentQuestion = datas.find((question: Question) => question.id === page);
+let currentQuestion = datas.find((question: Question) => question.id === quiz.page);
   const datasLength = datas.length;
   const currentId = currentQuestion?.id
   let correctAnswer = currentQuestion?.answers.find(answer => answer.isCorrect);
 
 console.log("correct answer",correctAnswer?.id);
- 
+
   useEffect(() => {
     setSelectedAnswer(null);
     setButtonState({ class: "", btnId: "" });
@@ -57,7 +44,7 @@ console.log("correct answer",correctAnswer?.id);
       
       
       if (selectedAnswer) {
-        // Eğer seçilen bir cevap varsa, buttonState'i güncelle
+        // eğer seçilen bir cevap varsa, buttonState'i güncelle
         setButtonState({
           class: selectedAnswer.isTrue ? "secondary-btn" : "btn-false",
           btnId: selectedAnswer.btnId,
@@ -70,23 +57,21 @@ console.log("correct answer",correctAnswer?.id);
   
 
   function nextQ() {
-    if (page === datasLength) {
-      setPage(1)
-    } else {
-      setPage(page + 1)
-    }
+    setQuiz((prevQuiz:QuizState) => ({
+      ...prevQuiz,   
+      page: prevQuiz.page === datasLength ? 1 : prevQuiz.page + 1
+    }));
 
   }
   function lastQ() {
-    if (page === 1) {
-      setPage(datasLength)
-    } else {
-      setPage(page - 1)
-    }
+    setQuiz((prevQuiz:QuizState) => ({
+      ...prevQuiz,  
+      page: prevQuiz.page === 1 ? datasLength : prevQuiz.page - 1 
+    }));
 
   }
   function findTrue(answerId: string,isCorrect:boolean) {
-    !currentQuestion?.clicked &&  setSelectedAnswer(answerId); // soru seçildiyse tekrar seçilemiyor
+    !currentQuestion?.clicked &&  setSelectedAnswer(answerId); 
     if (!currentQuestion?.clicked) {
       setAnswerControl((prevState) => [
         ...prevState, 
@@ -100,7 +85,7 @@ console.log("correct answer",correctAnswer?.id);
     
     
   
-   ( !currentQuestion?.clicked && isCorrect )&& setScore(score +10) // soru daha önce seçildiyse puanı değiştirmiyor
+   ( !currentQuestion?.clicked && isCorrect )&& setScore(score +10) 
    
    if (currentQuestion) {
     currentQuestion.clicked = true;
@@ -112,15 +97,14 @@ console.log("correct answer",correctAnswer?.id);
   function tryAgain()  {
 setScore(0);
 setButtonState({class:"",btnId:""})
-setPage(1)
-setFinishQuiz(false);
+setQuiz((prevQuiz:QuizState) => ({...prevQuiz,page: 1,finishQuiz:false}));
 datas.map((question: Question) => question.clicked = false);
 setSelectedAnswer("")
 setAnswerControl([]); 
 
   }
   function startQ(){
-    setStartQuiz(true)
+    setQuiz((prevQuiz:QuizState) => ({...prevQuiz,startQuiz:true }))
   }
   
 
@@ -129,12 +113,12 @@ setAnswerControl([]);
 
       <div className="container">
         <div className="top-area">
-          <h4 className={`${!startQuiz? "display" : ""}`}>Q:{currentId}/{datasLength}</h4>
+          <h4 className={`${!quiz.startQuiz? "display" : ""}`}>Q:{currentId}/{datasLength}</h4>
          <Header/>
         <Score/>
         </div>
         {
-          !startQuiz && (
+          !quiz.startQuiz && (
             <div className='start-btn'>
             <button onClick={startQ} className='start-btn-style'>Start Quiz</button>
             </div>
@@ -143,7 +127,7 @@ setAnswerControl([]);
     
        
         {
-          finishQuiz &&(
+          quiz.finishQuiz &&(
 <div className='score'>
         <div className='score-card'>
           <div className='score-card-messages'>
@@ -172,7 +156,7 @@ setAnswerControl([]);
         }
         
       {
-        (!finishQuiz && startQuiz) && (
+        (!quiz.finishQuiz && quiz.startQuiz) && (
 <>
 <Timer/>
         <div className='question-part'>
@@ -205,7 +189,7 @@ setAnswerControl([]);
               }
 {currentQuestion?.id === datasLength &&(
   <div className='finish-btn'>
-          <button onClick={() => {setFinishQuiz(true)}} className='try-finish-btn'>Finish the test</button>
+          <button onClick={() => {setQuiz((prevQuiz:QuizState) => ({...prevQuiz,finishQuiz:true}))}} className='try-finish-btn'>Finish the test</button>
           </div>
 )}
 
