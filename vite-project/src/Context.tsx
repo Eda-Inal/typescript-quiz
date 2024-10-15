@@ -2,6 +2,7 @@ import  { createContext, useContext, useState, ReactNode } from 'react';
 import { QuizState ,AnswerControl,ButtonState,Question} from './components/Interfaces';
 import datas from "../public/datas.json";
 
+
 const QuizContext = createContext<any>(null);
 export const QuizProvider = ({ children }: { children: ReactNode }) => {
     const [score, setScore] = useState<number>(0);
@@ -20,8 +21,18 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
     let currentQuestion = datas.find((question: Question) => question.id === quiz.page);
     let correctAnswer = currentQuestion?.answers.find(answer => answer.isCorrect);
     const currentId = currentQuestion?.id
+    function tryAgain()  {
+      setScore(0);
+      setButtonState({class:"",btnId:""})
+      setQuiz((prevQuiz:QuizState) => ({...prevQuiz,page: 1,finishQuiz:false}));
+      datas.map((question: Question) => question.clicked = false);
+      setSelectedAnswer("")
+      setAnswerControl([]); 
+      
+      
+        }
     return (
-      <QuizContext.Provider value={{ score, setScore,quiz,setQuiz,datasLength,answerControl,setAnswerControl,selectedAnswer,setSelectedAnswer,buttonState ,setButtonState,currentQuestion,currentId,correctAnswer}}>
+      <QuizContext.Provider value={{ score, setScore,quiz,setQuiz,datasLength,answerControl,setAnswerControl,selectedAnswer,setSelectedAnswer,buttonState ,setButtonState,currentQuestion,currentId,correctAnswer,tryAgain}}>
         {children}
       </QuizContext.Provider>
     );

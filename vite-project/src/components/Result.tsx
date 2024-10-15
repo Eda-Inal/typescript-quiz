@@ -2,7 +2,7 @@ import { useQuizContext } from "../Context";
 
 
 function Result() {
-    const {score,datasLength} = useQuizContext();
+    const {score,datasLength,tryAgain} = useQuizContext();
   return (
     <div className='score'>
     <div className='score-card'>
@@ -26,7 +26,7 @@ function Result() {
       
 
     </div>
-    <button className='try-finish-btn' >Try again</button>
+    <button onClick={tryAgain} className='try-finish-btn' >Try again</button>
     </div>
   )
 }
