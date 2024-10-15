@@ -1,13 +1,14 @@
 import '../styles.scss';
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import datas from "../../public/datas.json"
 import {useEffect } from 'react';
 import Score from './Score';
 import Header from './Header';
 import Timer from './Timer';
 import Result from './Result';
+import Start from './Start';
+import Finish from './Finish';
 import { useQuizContext } from '../Context'
-import { Question,QuizState,AnswerControl} from './Interfaces';
+import { QuizState,AnswerControl, Answer} from './Interfaces';
 
 
 
@@ -15,17 +16,9 @@ import { Question,QuizState,AnswerControl} from './Interfaces';
 
 
 function Main() {
-  const { score ,setScore,quiz,setQuiz,datasLength,answerControl,setAnswerControl,selectedAnswer,setSelectedAnswer,buttonState,setButtonState} = useQuizContext();
+  const { score ,setScore,quiz,setQuiz,datasLength,answerControl,setAnswerControl,selectedAnswer,setSelectedAnswer,buttonState,setButtonState,currentQuestion,currentId,correctAnswer} = useQuizContext();
  
 
-
-  
-let currentQuestion = datas.find((question: Question) => question.id === quiz.page);
-
-  const currentId = currentQuestion?.id
-  let correctAnswer = currentQuestion?.answers.find(answer => answer.isCorrect);
-
-console.log("correct answer",correctAnswer?.id);
 
   useEffect(() => {
     setSelectedAnswer(null);
@@ -96,9 +89,7 @@ console.log("correct answer",correctAnswer?.id);
 // setAnswerControl([]); 
 
 //   }
-  function startQ(){
-    setQuiz((prevQuiz:QuizState) => ({...prevQuiz,startQuiz:true }))
-  }
+ 
   
 
   return (
@@ -110,20 +101,8 @@ console.log("correct answer",correctAnswer?.id);
          <Header/>
         <Score/>
         </div>
-        {
-          !quiz.startQuiz && (
-            <div className='start-btn'>
-            <button onClick={startQ} className='start-btn-style'>Start Quiz</button>
-            </div>
-          )
-        }
-    
-       
-        {
-          quiz.finishQuiz &&(
-<Result/>
-          )
-        }
+        { !quiz.startQuiz &&  <Start/>}
+        {quiz.finishQuiz &&<Result/> }
         
       {
         (!quiz.finishQuiz && quiz.startQuiz) && (
@@ -135,7 +114,7 @@ console.log("correct answer",correctAnswer?.id);
             <button className={`btn-arrow ${currentId===1 ? 'display' :""}`  }  onClick={() => lastQ()} ><FaArrowLeft /></button>
             <div className='buttons'>
               {
-                currentQuestion?.answers.map((btn) => {
+                currentQuestion?.answers.map((btn:Answer) => {
                   const correctAnswerId = correctAnswer?.id; 
                   return (
                   <button onClick={() => findTrue(btn.id,btn.isCorrect)}
@@ -157,11 +136,7 @@ console.log("correct answer",correctAnswer?.id);
                   </button>
                 ) })
               }
-{currentQuestion?.id === datasLength &&(
-  <div className='finish-btn'>
-          <button onClick={() => {setQuiz((prevQuiz:QuizState) => ({...prevQuiz,finishQuiz:true}))}} className='try-finish-btn'>Finish the test</button>
-          </div>
-)}
+{currentQuestion?.id === datasLength &&<Finish/>}
 
             </div>
             <button className={`btn-arrow ${currentId===datasLength ? 'display' :""}`  }   onClick={() => nextQ()}><FaArrowRight /></button>

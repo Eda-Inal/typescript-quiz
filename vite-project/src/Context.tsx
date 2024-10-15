@@ -1,5 +1,5 @@
 import  { createContext, useContext, useState, ReactNode } from 'react';
-import { QuizState ,AnswerControl,ButtonState} from './components/Interfaces';
+import { QuizState ,AnswerControl,ButtonState,Question} from './components/Interfaces';
 import datas from "../public/datas.json";
 
 const QuizContext = createContext<any>(null);
@@ -17,9 +17,11 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
       finishQuiz:false,
       startQuiz:false
     })
-  
+    let currentQuestion = datas.find((question: Question) => question.id === quiz.page);
+    let correctAnswer = currentQuestion?.answers.find(answer => answer.isCorrect);
+    const currentId = currentQuestion?.id
     return (
-      <QuizContext.Provider value={{ score, setScore,quiz,setQuiz,datasLength,answerControl,setAnswerControl,selectedAnswer,setSelectedAnswer,buttonState ,setButtonState}}>
+      <QuizContext.Provider value={{ score, setScore,quiz,setQuiz,datasLength,answerControl,setAnswerControl,selectedAnswer,setSelectedAnswer,buttonState ,setButtonState,currentQuestion,currentId,correctAnswer}}>
         {children}
       </QuizContext.Provider>
     );
