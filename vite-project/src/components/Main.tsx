@@ -1,34 +1,27 @@
 import '../styles.scss';
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import datas from "../../public/datas.json"
-import { useState, useEffect } from 'react';
+import {useEffect } from 'react';
 import Score from './Score';
 import Header from './Header';
 import Timer from './Timer';
+import Result from './Result';
 import { useQuizContext } from '../Context'
-import { Question,QuizState } from './Interfaces';
+import { Question,QuizState,AnswerControl} from './Interfaces';
+
 
 
 
 
 
 function Main() {
-  const { score ,setScore,quiz,setQuiz} = useQuizContext();
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-
-  const [answerControl, setAnswerControl] = useState<
-  { answerId: number; isTrue: boolean | null;btnId:string }[]
->([]);
-const [buttonState, setButtonState] = useState<{
-  class: string;
-  btnId: string;
-}>({ class: "", btnId: "" });
-
+  const { score ,setScore,quiz,setQuiz,datasLength,answerControl,setAnswerControl,selectedAnswer,setSelectedAnswer,buttonState,setButtonState} = useQuizContext();
+ 
 
 
   
 let currentQuestion = datas.find((question: Question) => question.id === quiz.page);
-  const datasLength = datas.length;
+
   const currentId = currentQuestion?.id
   let correctAnswer = currentQuestion?.answers.find(answer => answer.isCorrect);
 
@@ -39,7 +32,7 @@ console.log("correct answer",correctAnswer?.id);
     setButtonState({ class: "", btnId: "" });
     if (currentQuestion?.clicked) {
       const selectedAnswer = answerControl.find(
-        (answer) => answer.answerId === currentId
+        (answer:AnswerControl) => answer.answerId === currentId
       );
       
       
@@ -73,7 +66,7 @@ console.log("correct answer",correctAnswer?.id);
   function findTrue(answerId: string,isCorrect:boolean) {
     !currentQuestion?.clicked &&  setSelectedAnswer(answerId); 
     if (!currentQuestion?.clicked) {
-      setAnswerControl((prevState) => [
+      setAnswerControl((prevState:AnswerControl[]) => [
         ...prevState, 
         {
           answerId: currentId ?? 0, 
@@ -94,15 +87,15 @@ console.log("correct answer",correctAnswer?.id);
 
       
   }
-  function tryAgain()  {
-setScore(0);
-setButtonState({class:"",btnId:""})
-setQuiz((prevQuiz:QuizState) => ({...prevQuiz,page: 1,finishQuiz:false}));
-datas.map((question: Question) => question.clicked = false);
-setSelectedAnswer("")
-setAnswerControl([]); 
+//   function tryAgain()  {
+// setScore(0);
+// setButtonState({class:"",btnId:""})
+// setQuiz((prevQuiz:QuizState) => ({...prevQuiz,page: 1,finishQuiz:false}));
+// datas.map((question: Question) => question.clicked = false);
+// setSelectedAnswer("")
+// setAnswerControl([]); 
 
-  }
+//   }
   function startQ(){
     setQuiz((prevQuiz:QuizState) => ({...prevQuiz,startQuiz:true }))
   }
@@ -128,30 +121,7 @@ setAnswerControl([]);
        
         {
           quiz.finishQuiz &&(
-<div className='score'>
-        <div className='score-card'>
-          <div className='score-card-messages'>
-            <div>
-              
-            </div>
-          <h3 className='h3-message'>Your score is <span className='span-color'>{score}</span> out of {datasLength *10}</h3>
-       
-       {
-         score >= 70? (
-           <h4>Amazing job! You really nailed it with a score of {score}. Keep up the great work, you're on your way to becoming a React pro!</h4>
-         ): score >= 50 ? (
-           <h4>Great effort! You scored {score}, which is a solid result. With a bit more practice, you'll reach the top in no time!</h4>
-         ) : (
-           <h4>Don't give up! You scored {score}, but remember that every step is progress. Keep learning and you'll see improvement soon!</h4>
-         )
-       }
-          </div>
-        
-          
-
-        </div>
-        <button className='try-finish-btn' onClick={() => tryAgain()}>Try again</button>
-        </div>
+<Result/>
           )
         }
         

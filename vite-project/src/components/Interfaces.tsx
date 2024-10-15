@@ -15,3 +15,12 @@ export interface Answer {
     finishQuiz: boolean,
     startQuiz:boolean
     }
+    export interface AnswerControl {
+      answerId: number;
+      isTrue: boolean | null;
+      btnId: string;
+    }
+    export interface ButtonState  {
+      class: string;
+      btnId: string;
+    }
