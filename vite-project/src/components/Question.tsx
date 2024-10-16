@@ -5,7 +5,7 @@ import { QuizState, AnswerControl, Answer } from './Interfaces';
 import Finish from './Finish';
 function Question() {
 
-  const {  setScore, setQuiz, datasLength, setAnswerControl, selectedAnswer, setSelectedAnswer, buttonState, currentQuestion, currentId, correctAnswer } = useQuizContext();
+  const { setScore, setQuiz, datasLength, setAnswerControl, selectedAnswer, setSelectedAnswer, buttonState, currentQuestion, currentId, correctAnswer } = useQuizContext();
   function nextQ() {
     setQuiz((prevQuiz: QuizState) => ({
       ...prevQuiz,
@@ -13,6 +13,7 @@ function Question() {
     }));
 
   }
+  
   function lastQ() {
     setQuiz((prevQuiz: QuizState) => ({
       ...prevQuiz,
@@ -30,7 +31,7 @@ function Question() {
     ]);
   }
   function incrementScore() {
-    setScore((prevScore:number) => prevScore + 10);
+    setScore((prevScore: number) => prevScore + 10);
   }
   function markQuestionAsClicked() {
     if (currentQuestion) currentQuestion.clicked = true;
@@ -49,6 +50,18 @@ function Question() {
       markQuestionAsClicked();
     }
   }
+  function getButtonClass(btn: Answer): string {
+    const correctAnswerId = correctAnswer?.id;
+
+    if (currentQuestion?.clicked) {
+      if (buttonState.btnId === btn.id) {
+        return buttonState.class; // tıklanan butonun sınıfı
+      }
+      return correctAnswerId === btn.id ? 'secondary-btn' : ''; // doğru cevaba yeşil ekle
+    }
+    return selectedAnswer === btn.id ? (btn.isCorrect ? 'secondary-btn' : 'btn-false') : '';
+  }
+
 
   return (
     <div className='question-part'>
@@ -58,20 +71,10 @@ function Question() {
         <div className='buttons'>
           {
             currentQuestion?.answers.map((btn: Answer) => {
-              const correctAnswerId = correctAnswer?.id;
+
               return (
                 <button onClick={() => findTrue(btn.id, btn.isCorrect)}
-                  className={`primary-btn btn-content ${currentQuestion?.clicked ?
-                      // eğer soru tıklanmışsa:
-                      (buttonState.btnId === btn.id ?
-                        // tıklanan cevap:
-                        buttonState.class :
-                        // yanlış cevap tıklanmışsa, doğru cevaba yeşil sınıf ekle:
-                        (correctAnswerId === btn.id ? 'secondary-btn' : '')
-                      ) :
-                      // tıklanmamışsa normal kontrol:
-                      (selectedAnswer === btn.id ? (btn.isCorrect ? 'secondary-btn' : 'btn-false') : '')
-                    }`}
+                  className={`primary-btn btn-content ${getButtonClass(btn)}`}
                   key={btn.id}>
 
                   <h4>{btn.text}</h4>

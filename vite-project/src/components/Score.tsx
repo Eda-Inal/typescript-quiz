@@ -1,9 +1,9 @@
 import { useQuizContext } from '../Context'
 
 function Score() {
-    const { score } = useQuizContext();
+  const { score } = useQuizContext();
   return (
-   <h4>Score:{score}</h4>
+    <h4>Score:{score}</h4>
   )
 }
 

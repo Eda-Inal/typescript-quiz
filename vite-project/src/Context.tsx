@@ -1,6 +1,7 @@
 import  { createContext, useContext, useState, ReactNode } from 'react';
 import { QuizState ,AnswerControl,ButtonState,Question} from './components/Interfaces';
 import datas from "../public/datas.json";
+import { useEffect } from 'react';
 
 
 const QuizContext = createContext<any>(null);
@@ -21,6 +22,28 @@ export const QuizProvider = ({ children }: { children: ReactNode }) => {
     let currentQuestion = datas.find((question: Question) => question.id === quiz.page);
     let correctAnswer = currentQuestion?.answers.find(answer => answer.isCorrect);
     const currentId = currentQuestion?.id
+    
+    useEffect(() => {
+      setSelectedAnswer(null);
+      setButtonState({ class: "", btnId: "" });
+      if (currentQuestion?.clicked) {
+        const selectedAnswer = answerControl.find(
+          (answer: AnswerControl) => answer.answerId === currentId
+        );
+  
+  
+        if (selectedAnswer) {
+          // eğer seçilen bir cevap varsa, buttonState'i güncelle
+          setButtonState({
+            class: selectedAnswer.isTrue ? "secondary-btn" : "btn-false",
+            btnId: selectedAnswer.btnId,
+          });
+        }
+  
+      }
+  
+    }, [currentQuestion, answerControl]);
+  
     function tryAgain()  {
       setScore(0);
       setButtonState({class:"",btnId:""})

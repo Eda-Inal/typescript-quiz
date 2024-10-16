@@ -6,8 +6,8 @@ function App() {
   return (
     <>
       <QuizProvider>
-      <Main />
-    </QuizProvider>
+        <Main />
+      </QuizProvider>
     </>
   )
 }
