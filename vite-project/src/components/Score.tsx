@@ -1,9 +1,9 @@
 import { useQuizContext } from '../Context'
 
 function Score() {
-  const { score } = useQuizContext();
+  const { score, quiz } = useQuizContext();
   return (
-    <h4>Score:{score}</h4>
+    <h4 className={`${!quiz.startQuiz ? "display" : ""}`}>Score:{score}</h4>
   )
 }
 
