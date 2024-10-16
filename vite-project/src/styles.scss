@@ -149,20 +149,40 @@ h4 {
     justify-content: center;
     margin-top: 2rem;
 }
+@keyframes borderChange {
+    0% {
+      border-color: #7fc9fb; 
+    }
+   
+    40% {
+      border-color: #32bfe5; 
+    }
+    60% {
+      border-color: #227de6; 
+    }
+    80% {
+        border-color: #f44a38; 
+      }
+    90% {
+      border-color: #ed321d; 
+    }
+  }
 
 .circle {
     width: 120px;
     height: 120px;
-    border: 1px solid white;
+    border: 5px solid white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 2px 2px rgb(200, 200, 200);
+    animation: borderChange 50s linear forwards; 
+    animation-fill-mode: forwards; 
     @media (max-width: 600px) {
         width: 100px;
         height: 100px;
     }
+ 
 
 
 }
