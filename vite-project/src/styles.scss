@@ -62,13 +62,31 @@ body {
         font-size: 0.8rem;
     }
 }
-.start-btn-style{
-    @include smallBtns(200px,80px ,20px 30px ,1.3rem ,500, #58c4dc, #323232,40px);
+.start-btn-style {
+    @include smallBtns(200px, 80px, 20px 30px, 1.3rem, 500, #58c4dc, #323232, 40px);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to right,  #1c1c1c,#8ee5f9);
+    background-size: 200% 100%;
+    animation: slideBackground 2s linear forwards;
+  
     @media (max-width: 600px) {
-        width: 150px;
-        font-size: 1.1rem;
+      width: 150px;
+      font-size: 1.1rem;
     }
-}
+  }
+  
+  @keyframes slideBackground {
+    0% {
+      background-position: 0% 0;
+      color: white;
+    }
+    100% {
+      background-position: -100% 0;
+     
+    }
+  }
+  
 
 .container {
     margin: 0 auto;
