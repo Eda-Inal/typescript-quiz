@@ -1,7 +1,7 @@
 # Typescript Quiz Game
 [Live](https://typescript-quizgame.vercel.app/)
 
-### This is a project I developed to improve my TypeScript skills. For the design, I used SCSS, and Context API for state management. The project is fully modular and responsiv
+### This is a project I developed to improve my TypeScript skills. For the design, I used SCSS, and Context API for state management. The project is fully modular and responsive
 ### Features:
 * #### There are 10 React questions.
 * #### Points are awarded for each correct answer.
